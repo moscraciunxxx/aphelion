@@ -208,7 +208,7 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
           __compactRuntime.typeError('confirmDetection',
                                      'argument 1 (as invoked from Typescript)',
-                                     'aphelion.compact line 120 char 1',
+                                     'aphelion.compact line 122 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
@@ -561,10 +561,16 @@ export class Contract {
     const snr_0 = this._snrMilli_0(context, partialProofData);
     const att_0 = this._instrumentSecret_0(context, partialProofData);
     const bind_0 = this._bindObservation_0(sky_0, strain_0);
-    __compactRuntime.assert(!this._equal_3(bind_0,
+    __compactRuntime.assert(!this._equal_3(sky_0,
+                                           new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])),
+                            'empty observation');
+    __compactRuntime.assert(!this._equal_4(strain_0,
+                                           new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])),
+                            'empty observation');
+    __compactRuntime.assert(!this._equal_5(bind_0,
                                            new Uint8Array([97, 112, 104, 101, 108, 105, 111, 110, 58, 98, 105, 110, 100, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])),
                             'empty observation');
-    __compactRuntime.assert(this._equal_4(this._makeAttestation_0(instClass_0,
+    __compactRuntime.assert(this._equal_6(this._makeAttestation_0(instClass_0,
                                                                   minSnrBand_0,
                                                                   att_0),
                                           _descriptor_1.fromValue(__compactRuntime.queryLedgerState(context,
@@ -584,7 +590,7 @@ export class Contract {
     __compactRuntime.assert(snr_0 >= floor_0, 'SNR below accredited threshold');
     const epochBytes_0 = __compactRuntime.convertFieldToBytes(32,
                                                               epochIn_0,
-                                                              'aphelion.compact line 107 char 22');
+                                                              'aphelion.compact line 109 char 22');
     const nf_0 = this._makeNullifier_0(sk_0, epochBytes_0);
     __compactRuntime.assert(!_descriptor_4.fromValue(__compactRuntime.queryLedgerState(context,
                                                                                        partialProofData,
@@ -733,6 +739,14 @@ export class Contract {
     return true;
   }
   _equal_4(x0, y0) {
+    if (!x0.every((x, i) => y0[i] === x)) { return false; }
+    return true;
+  }
+  _equal_5(x0, y0) {
+    if (!x0.every((x, i) => y0[i] === x)) { return false; }
+    return true;
+  }
+  _equal_6(x0, y0) {
     if (!x0.every((x, i) => y0[i] === x)) { return false; }
     return true;
   }

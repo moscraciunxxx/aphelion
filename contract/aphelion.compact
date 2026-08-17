@@ -94,6 +94,8 @@ export circuit fileDetection(
   const att = instrumentSecret();
 
   const bind = bindObservation(sky, strain);
+  assert(sky != pad(32, ""), "empty observation");
+  assert(strain != pad(32, ""), "empty observation");
   assert(bind != pad(32, "aphelion:bind:"), "empty observation");
 
   assert(

@@ -112,6 +112,10 @@ export class AphelionContract {
     const snr = Number(snrMilli);
 
     const bind = bindObservation(skyHash, strainHash);
+    const zero = hex32(Buffer.alloc(32));
+    if (hex32(as32(skyHash)) === zero || hex32(as32(strainHash)) === zero) {
+      throw new Error("empty observation");
+    }
     if (hex32(bind) === hex32(pad32("aphelion:bind:"))) {
       throw new Error("empty observation");
     }
@@ -202,7 +206,6 @@ export const compactCircuits = [
 ];
 
 function assertNoSecrets(publicState) {
-  const text = JSON.stringify(publicState);
   for (const forbidden of [
     "observerSecret",
     "instrumentSecret",
@@ -218,12 +221,6 @@ function assertNoSecrets(publicState) {
     if (Object.hasOwn(publicState, forbidden)) {
       throw new Error(`secret field leaked into public state: ${forbidden}`);
     }
-    if (new RegExp(`"${forbidden}"`).test(text) && forbidden !== "snrBand") {
-      // snrBand is public; the private snrMilli must not appear as a key
-    }
-  }
-  if (Object.hasOwn(publicState, "snrMilli") || Object.hasOwn(publicState, "samples")) {
-    throw new Error("private measurement copied into public state");
   }
 }
 

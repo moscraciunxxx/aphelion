@@ -140,6 +140,42 @@ test("wrong instrument secret cannot file", () => {
   );
 });
 
+test("zero sky or strain hashes are rejected as empty observations", () => {
+  const instrumentSecret = secret();
+  const contract = new AphelionContract("test");
+  contract.issueInstrument({ instrumentClass: 2, minSnrBand: 1, instrumentSecret });
+  const obs = observe(closeDetection());
+  const zeros = "0".repeat(64);
+  assert.throws(
+    () =>
+      contract.fileDetection({
+        instrumentClass: 2,
+        minSnrBand: 1,
+        epoch: 20260817,
+        observerSecret: secret(),
+        skyHash: zeros,
+        strainHash: obs.strainHash,
+        snrMilli: obs.snrMilli,
+        instrumentSecret,
+      }),
+    /empty observation/,
+  );
+  assert.throws(
+    () =>
+      contract.fileDetection({
+        instrumentClass: 2,
+        minSnrBand: 1,
+        epoch: 20260817,
+        observerSecret: secret(),
+        skyHash: obs.skyHash,
+        strainHash: zeros,
+        snrMilli: obs.snrMilli,
+        instrumentSecret,
+      }),
+    /empty observation/,
+  );
+});
+
 test("nullifier cannot be spent twice", () => {
   const instrumentSecret = secret();
   const observerSecret = secret();

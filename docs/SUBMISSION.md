@@ -4,7 +4,8 @@
 **Tagline:** Prove the detection. Keep the sky.  
 **Built with:** Midnight, Compact, Node.js, WebGL2, zero-knowledge proofs  
 **Website:** http://127.0.0.1:8787 (source README has setup)  
-**Repo:** https://github.com/moscraciunxxx/aphelion
+**Repo:** https://github.com/moscraciunxxx/aphelion  
+**Demo video:** https://youtu.be/t0M8Obykp84 (Unlisted)
 
 ## Inspiration
 

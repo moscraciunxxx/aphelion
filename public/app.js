@@ -139,6 +139,19 @@
 
   $("fileBtn").addEventListener("click", async () => {
     try {
+      const ledger = await api("/api/ledger");
+      const unissued =
+        !ledger ||
+        ledger.status === "EMPTY" ||
+        !ledger.attestationRoot ||
+        /^0+$/.test(String(ledger.attestationRoot));
+      if (unissued) {
+        await api("/api/issue", {
+          instrumentClass: val("instrumentClass"),
+          minSnrBand: val("minSnrBand"),
+          instrumentSecret: val("instrumentSecret"),
+        });
+      }
       const out = await api("/api/file", payload());
       setLedger(out.public, out.proof);
       $("result").textContent =
