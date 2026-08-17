@@ -1,0 +1,184 @@
+:root {
+  --void: #07070a;
+  --ink: #0d0e13;
+  --bone: #e8dcc8;
+  --bone-dim: #9a9080;
+  --ember: #d46a2c;
+  --ember-soft: #ffb080;
+  --horizon: #6aa7c7;
+  --ok: #8fbf8a;
+  --bad: #c45c4a;
+  --line: rgba(232, 220, 200, 0.12);
+  --panel: rgba(8, 9, 14, 0.62);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: var(--void); color: var(--bone); }
+body {
+  font-family: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+  overflow: hidden;
+  letter-spacing: 0.01em;
+}
+
+#horizon {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+.file-warn {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  background: #2a1510;
+  color: var(--ember-soft);
+  border: 1px solid var(--ember);
+  padding: 10px 14px;
+  font-size: 13px;
+  max-width: 720px;
+}
+body.file .file-warn { display: block; }
+
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.hud * { pointer-events: auto; }
+
+.mast {
+  position: absolute;
+  top: 22px;
+  left: 28px;
+  max-width: 420px;
+}
+.mast .kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--horizon);
+}
+.mast h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.88;
+  margin: 8px 0 10px;
+}
+.mast p {
+  color: var(--bone-dim);
+  font-size: 14px;
+  max-width: 34ch;
+  line-height: 1.45;
+}
+
+.clock {
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  text-align: right;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--bone-dim);
+}
+.clock strong { display: block; color: var(--bone); font-size: 13px; font-weight: 500; }
+
+.panel {
+  position: absolute;
+  width: min(360px, calc(100vw - 32px));
+  background: var(--panel);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+  padding: 16px 16px 14px;
+}
+.panel h2 {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember-soft);
+  margin-bottom: 12px;
+}
+.panel.left { left: 24px; bottom: 24px; }
+.panel.right { right: 24px; bottom: 24px; }
+
+label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--bone-dim);
+  margin: 7px 0;
+}
+label span.name { min-width: 7.5rem; }
+input, select {
+  flex: 1;
+  background: #101218;
+  color: var(--bone);
+  border: 1px solid var(--line);
+  padding: 6px 8px;
+  font: 12px/1.2 "IBM Plex Mono", ui-monospace, monospace;
+}
+.row { display: flex; gap: 8px; margin-top: 12px; }
+button {
+  appearance: none;
+  border: 1px solid var(--ember);
+  background: transparent;
+  color: var(--bone);
+  font: 11px/1 "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+button.primary { background: var(--ember); color: #140b07; border-color: var(--ember); }
+button:hover { filter: brightness(1.08); }
+
+.ledger {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.55;
+}
+.ledger .k { color: var(--bone-dim); }
+.ledger .v { color: var(--bone); word-break: break-all; }
+.ledger .redacted {
+  color: var(--bad);
+  letter-spacing: 0.18em;
+}
+.ok { color: var(--ok); }
+.err { color: var(--bad); margin-top: 8px; font-size: 12px; min-height: 1.2em; }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+.pill {
+  border: 1px dashed var(--line);
+  padding: 8px;
+  font-size: 11px;
+}
+.pill b { display: block; font-weight: 500; margin-bottom: 4px; }
+
+@media (max-width: 860px) {
+  .panel.left, .panel.right {
+    position: relative;
+    left: auto; right: auto; bottom: auto;
+    width: 100%;
+  }
+  .hud { overflow: auto; pointer-events: auto; }
+  .mast { position: relative; top: 12px; left: 16px; }
+  .clock { position: relative; top: 8px; right: auto; text-align: left; padding: 0 16px; }
+  body { overflow: auto; }
+  #horizon { position: sticky; top: 0; height: 48vh; }
+}

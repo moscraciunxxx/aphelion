@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+demo/renders/
+demo/*.wav
+demo/*.mp4
+*.log
+.env
+wallet-seed.txt
+contract/managed/aphelion-keys/
+test-results/

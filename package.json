@@ -1,0 +1,14 @@
+{
+  "name": "aphelion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Prove a detection. Keep the sky. Sealed observatory on Midnight.",
+  "scripts": {
+    "start": "node server/index.js",
+    "demo": "node cli/aphelion.js demo",
+    "test": "node --test tests/*.test.js",
+    "compile": "node scripts/compile-compact.js",
+    "deploy": "node scripts/deploy-midnight.js"
+  }
+}

@@ -1,0 +1,123 @@
+// Aphelion — sealed observatory on Midnight.
+// Public ledger receives only what a consortium must see: instrument class,
+// SNR band, epoch, and a nullifier. Sky coordinates, raw strain, observer
+// identity, and the instrument secret stay in the witness.
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+export enum Status {
+  EMPTY,
+  OPEN,
+  CONFIRMED
+}
+
+export ledger status: Status;
+export ledger detectionCount: Counter;
+export ledger instrumentClass: Uint<8>;
+export ledger snrBand: Uint<8>;
+export ledger epoch: Uint<32>;
+export ledger nullifier: Bytes<32>;
+export ledger attestationRoot: Bytes<32>;
+export ledger contractTag: Bytes<32>;
+export ledger spent: Map<Bytes<32>, Boolean>;
+
+constructor() {
+  status = Status.EMPTY;
+  contractTag = pad(32, "aphelion:v1");
+}
+
+witness observerSecret(): Bytes<32>;
+witness skyHash(): Bytes<32>;
+witness strainHash(): Bytes<32>;
+witness snrMilli(): Uint<32>;
+witness instrumentSecret(): Bytes<32>;
+
+export circuit makeAttestation(
+  instClass: Uint<8>,
+  minSnrBand: Uint<8>,
+  secret: Bytes<32>
+): Bytes<32> {
+  return persistentHash<Vector<4, Bytes<32>>>([
+    pad(32, "aphelion:at:"),
+    instClass as Field as Bytes<32>,
+    minSnrBand as Field as Bytes<32>,
+    secret
+  ]);
+}
+
+export circuit makeNullifier(sk: Bytes<32>, epochBytes: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([
+    pad(32, "aphelion:nf:"),
+    epochBytes,
+    sk
+  ]);
+}
+
+export circuit bindObservation(sky: Bytes<32>, strain: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([
+    pad(32, "aphelion:bind:"),
+    sky,
+    strain
+  ]);
+}
+
+export circuit minSnrForBand(band: Uint<8>): Uint<32> {
+  if (band == 0) {
+    return 500;
+  }
+  if (band == 1) {
+    return 800;
+  }
+  if (band == 2) {
+    return 1200;
+  }
+  return 2000;
+}
+
+export circuit issueInstrument(instClass: Uint<8>, minSnrBand: Uint<8>): [] {
+  const root = makeAttestation(instClass, minSnrBand, instrumentSecret());
+  attestationRoot = disclose(root);
+  instrumentClass = disclose(instClass);
+  snrBand = disclose(minSnrBand);
+}
+
+export circuit fileDetection(
+  instClass: Uint<8>,
+  minSnrBand: Uint<8>,
+  epochIn: Uint<32>
+): [] {
+  const sk = observerSecret();
+  const sky = skyHash();
+  const strain = strainHash();
+  const snr = snrMilli();
+  const att = instrumentSecret();
+
+  const bind = bindObservation(sky, strain);
+  assert(bind != pad(32, "aphelion:bind:"), "empty observation");
+
+  assert(
+    makeAttestation(instClass, minSnrBand, att) == attestationRoot,
+    "instrument not accredited"
+  );
+
+  const floor = minSnrForBand(minSnrBand);
+  assert(snr >= floor, "SNR below accredited threshold");
+
+  const epochBytes = epochIn as Field as Bytes<32>;
+  const nf = disclose(makeNullifier(sk, epochBytes));
+  assert(!spent.member(nf), "observation already filed");
+  spent.insert(nf, true);
+
+  nullifier = disclose(nf);
+  instrumentClass = disclose(instClass);
+  snrBand = disclose(minSnrBand);
+  epoch = disclose(epochIn);
+  status = Status.OPEN;
+  detectionCount.increment(1);
+}
+
+export circuit confirmDetection(): [] {
+  assert(status == Status.OPEN, "nothing to confirm");
+  status = Status.CONFIRMED;
+}
