@@ -4,7 +4,9 @@
 
 Aphelion is a sealed observatory on [Midnight](https://midnight.network/). A Compact circuit lets a consortium learn only that an accredited instrument saw a signal above a public SNR band. Right ascension, declination, raw strain, the observer, and the instrument secret stay in the witness. They are never written to the public ledger.
 
-Source: https://github.com/moscraciunxxx/aphelion
+Source / Judge URL: https://github.com/moscraciunxxx/aphelion
+
+**Public fixture (first-screen number):** SNR band **1** (≥ 8.00) · status **CONFIRMED** · detections **1**. RA/Dec stay in the witness. Demo tape: https://youtu.be/t0M8Obykp84
 
 The viewport is the instrument: a general-relativistic thin-disk / photon-ring renderer. Changing mass, spin, or distance moves the disk you see and the private photometry the circuit consumes.
 
@@ -19,17 +21,21 @@ Public ledgers are too transparent for astronomy. Localizations can be embargoed
 Requires Node 22+. The Compact compiler is optional for the local demo (the Node bindings the backend actually calls are tested). A Preview/PreProd deploy also needs Docker (proof server) and tNIGHT.
 
 ```bash
+git clone https://github.com/moscraciunxxx/aphelion
+cd aphelion
 npm test
+npm run demo
+```
+
+`npm run demo` prints `APHELION HUD  SNR band 1  status CONFIRMED  detections 1` and writes `artifacts/public-ledger.json` (public fields only).
+
+Optional local instrument (not the Judge URL):
+
+```bash
 npm start
 ```
 
-Open [http://127.0.0.1:8787](http://127.0.0.1:8787). Do not open `public/index.html` as `file://`.
-
-Representative circuit (same entry the logs use):
-
-```bash
-npm run demo
-```
+Then open the server URL printed by the process. Do not open `public/index.html` as `file://`.
 
 Compile the Compact contract (compiler 0.31.1):
 

@@ -64,6 +64,17 @@
       el.textContent = "no public state";
       return;
     }
+    const hud = $("publicHud");
+    if (hud && publicState.detectionCount > 0) {
+      hud.innerHTML =
+        "Public ledger: SNR band <b>" +
+        publicState.snrBand +
+        "</b> (≥ 8.00) · status <b>" +
+        publicState.status +
+        "</b> · detections <b>" +
+        publicState.detectionCount +
+        "</b>";
+    }
     el.innerHTML = [
       kv("contract", publicState.contractId),
       kv("status", publicState.status),

@@ -3,9 +3,10 @@
 **Project name:** APHELION  
 **Tagline:** Prove the detection. Keep the sky.  
 **Built with:** Midnight, Compact, Node.js, WebGL2, zero-knowledge proofs  
-**Website:** http://127.0.0.1:8787 (source README has setup)  
+**Website / live demo:** https://github.com/moscraciunxxx/aphelion  
 **Repo:** https://github.com/moscraciunxxx/aphelion  
-**Demo video:** https://youtu.be/t0M8Obykp84 (Unlisted)
+**Demo video:** https://youtu.be/t0M8Obykp84 (Unlisted)  
+**First-screen number:** public SNR band **1** (≥ 8.00) · status CONFIRMED · detections **1** (`npm run demo` → `artifacts/public-ledger.json`)
 
 ## Inspiration
 
@@ -55,8 +56,11 @@ Proof-server deploy to PreProd the moment Docker is available; multi-observatory
 ## Setup
 
 ```
+git clone https://github.com/moscraciunxxx/aphelion
+cd aphelion
 npm test
-npm start
-# http://127.0.0.1:8787
 npm run demo
+# local instrument (optional): npm start  →  http://127.0.0.1:8787
 ```
+
+Ten-second try for judges: the unlisted tape, or `npm run demo` which prints `APHELION HUD  SNR band 1  status CONFIRMED  detections 1`. There is **no** Preview/PreProd contract address on this machine (no Docker proof-server).
