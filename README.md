@@ -6,7 +6,7 @@ Aphelion is a sealed observatory on [Midnight](https://midnight.network/). A Com
 
 Source / Judge URL: https://github.com/moscraciunxxx/aphelion
 
-**Public fixture (first-screen number):** SNR band **1** (≥ 8.00) · status **CONFIRMED** · detections **1**. RA/Dec stay in the witness. Demo tape: https://youtu.be/t0M8Obykp84
+**Public fixture (first-screen number):** SNR band **1** (≥ 8.00) · status **CONFIRMED** · detections **1**. RA/Dec stay in the witness. Demo tape: https://youtu.be/pvheSmLqFRo
 
 The viewport is the instrument: a general-relativistic thin-disk / photon-ring renderer. Changing mass, spin, or distance moves the disk you see and the private photometry the circuit consumes.
 

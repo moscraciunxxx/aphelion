@@ -5,7 +5,7 @@
 **Built with:** Midnight, Compact, Node.js, WebGL2, zero-knowledge proofs  
 **Website / live demo:** https://github.com/moscraciunxxx/aphelion  
 **Repo:** https://github.com/moscraciunxxx/aphelion  
-**Demo video:** https://youtu.be/t0M8Obykp84 (Unlisted)  
+**Demo video:** https://youtu.be/pvheSmLqFRo (Unlisted)  
 **First-screen number:** public SNR band **1** (≥ 8.00) · status CONFIRMED · detections **1** (`npm run demo` → `artifacts/public-ledger.json`)
 
 ## Inspiration

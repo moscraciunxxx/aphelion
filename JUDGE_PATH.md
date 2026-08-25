@@ -19,7 +19,7 @@ Family: Devpost
 1. Judge URL (logged-out reachable): https://github.com/moscraciunxxx/aphelion
 2. Required surface on camera: Compact `fileDetection` / `issueInstrument` / `confirmDetection` plus the public ledger strip (SNR band, status, detection count) — never RA/Dec witnesses. Midnight Preview/PreProd deploy is **required by rules** and **not present** (Docker missing); do not fake an address.
 3. Number on the first screen: public **SNR band 1** (≥ 8.00 milli-SNR floor 800) · **status CONFIRMED** · **detections 1** (fixture `npm run demo`)
-4. Ten-second try (command or URL): https://youtu.be/t0M8Obykp84 (unlisted demo) **or** `git clone https://github.com/moscraciunxxx/aphelion && cd aphelion && npm test && npm run demo`
+4. Ten-second try (command or URL): https://youtu.be/pvheSmLqFRo (unlisted demo) **or** `git clone https://github.com/moscraciunxxx/aphelion && cd aphelion && npm test && npm run demo`
 
 Product verb (not “summarize” / not clone of sponsor): **file a detection on Midnight without publishing the sky**  
 State-changing? yes — ledger status EMPTY → OPEN → CONFIRMED, detectionCount increments  
@@ -30,11 +30,11 @@ Non-chat UI? yes — photon-ring instrument + public ledger panel
 - [x] Official entry surface created (Devpost software / Kaggle submit / Discord showcase) — **SUBMITTED** `aphelion` on challenge 30979 (Chrome manage/submissions 2026-08-21)
 - [x] Public GitHub or required artifact — https://github.com/moscraciunxxx/aphelion
 - [x] Logged-out fetch of Judge URL succeeds
-- [x] Demo the rules asked for (post / video / notebook) — https://youtu.be/t0M8Obykp84
+- [x] Demo the rules asked for (post / video / notebook) — https://youtu.be/pvheSmLqFRo
 - [x] Public page matches repo — Devpost pack `docs/SUBMISSION.md` Website is GitHub + YouTube, not localhost
 - [x] HUD on that surface is non-zero — public SNR band 1 / CONFIRMED / detections 1
 - [ ] Engagement done **if** scored (X/LinkedIn/Discord) — Presentation & Demo is 5%; no X requirement. Optional.
-- [x] VoiceBank tape via `voicebank-demo` if there is VO — existing unlisted YouTube named in pack
+- [x] VoiceBank tape via `voicebank-demo` if there is VO — https://youtu.be/pvheSmLqFRo (walkthrough VO, leak-checked)
 - [ ] Hidden-exam hedge named if public vs private LB — n/a
 
 Keepers stay shapes: VoiceBank as a local clone + leak-test instrument; winner patterns (state-changing agents, non-chat UI, a number on screen); VOICEKEEP-RT; CAGEPROOF-X.

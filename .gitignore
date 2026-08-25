@@ -1,6 +1,9 @@
 node_modules/
 .DS_Store
 demo/renders/
+demo/node_modules/
+demo/package-lock.json
+demo/package.json
 demo/*.wav
 demo/*.mp4
 *.log
